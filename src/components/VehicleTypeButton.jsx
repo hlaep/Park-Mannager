@@ -1,6 +1,6 @@
 import React from 'react'
-import {Text, StyleSheet, TouchableOpacity} from 'react-native'
-import {useNavigation} from '@react-navigation/native'
+import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -9,12 +9,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
-    marginBottom: 8,
+    marginBottom: 8
   },
   text: {
     fontSize: 22,
-    textTransform: 'capitalize'
-  },
+    textTransform: 'capitalize',
+    color: '#B3B7EE'
+  }
 })
 
 export const VehicleTypeButton = props => {
@@ -26,7 +27,8 @@ export const VehicleTypeButton = props => {
     <TouchableOpacity
       activeOpacity={0.9}
       style={styles.wrapper}
-      onPress={() => navigate()}>
+      onPress={() => navigate()}
+    >
       <Text style={styles.text}>{props.name}</Text>
     </TouchableOpacity>
   )

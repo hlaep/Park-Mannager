@@ -1,20 +1,21 @@
 import React from 'react'
-import {StyleSheet, Text} from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 
 const styles = StyleSheet.create({
   wrapper: {
     fontSize: 20,
     marginTop: 6,
+    color: '#B3B7EE'
   },
   charge: {
-    color: '#45F0DF',
-  },
+    color: '#45F0DF'
+  }
 })
 
 export const ChargeCardStat = props => {
   const formatedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'BRL',
+    currency: 'BRL'
   }).format(props.charge)
 
   return (

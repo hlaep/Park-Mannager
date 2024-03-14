@@ -1,17 +1,17 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native'
-import {StateContext} from '../context/StateContext'
-import {CarOfHistory} from '../components/CarOfHistory'
-import {clearHistory} from '../db/parkingCarsDb'
+import { StateContext } from '../context/StateContext'
+import { CarOfHistory } from '../components/CarOfHistory'
+import { clearHistory } from '../db/parkingCarsDb'
 
 export const HistoryScreen = () => {
-  const {cars} = useContext(StateContext)
+  const { cars } = useContext(StateContext)
   const [displayCars, setDisplayCars] = useState([])
   const datesToDisplay = [new Date()]
   const tickets = cars
@@ -25,7 +25,7 @@ export const HistoryScreen = () => {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
+      day: 'numeric'
     }
     return date.toLocaleDateString(undefined, options)
   }
@@ -80,10 +80,10 @@ export const HistoryScreen = () => {
         toDisplay.push(
           <View key={title} style={styles.centerTitle}>
             <Text style={styles.title}>{title}</Text>
-          </View>,
+          </View>
         )
         getTicketsOfDate(date, tickets).forEach(ticket =>
-          toDisplay.push(<CarOfHistory key={ticket.id} {...ticket} />),
+          toDisplay.push(<CarOfHistory key={ticket.id} {...ticket} />)
         )
       }
     }
@@ -133,7 +133,8 @@ export const HistoryScreen = () => {
           <View style={styles.center}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => handleShowMore()}>
+              onPress={() => handleShowMore()}
+            >
               <Text style={styles.btnTxt}>Mostrar mais...</Text>
             </TouchableOpacity>
           </View>
@@ -146,43 +147,41 @@ export const HistoryScreen = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    paddingLeft: 16,
-    paddingVertical: 6,
-    backgroundColor: '#B3B7EE',
+    backgroundColor: '#B3B7EE'
   },
   scrollView: {
-    paddingRight: 16,
+    paddingHorizontal: 16
   },
   centerTitle: {
     flex: 1,
     alignItems: 'center',
     paddingBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'black',
+    borderBottomColor: 'black'
   },
   title: {
     color: '#000807',
     fontSize: 35,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   txt: {
     color: '#000807',
-    fontSize: 18,
+    fontSize: 18
   },
   center: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   btn: {
     marginTop: 16,
     padding: 10,
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 6,
+    borderRadius: 6
   },
   btnTxt: {
     color: '#000807',
-    fontSize: 16,
-  },
+    fontSize: 16
+  }
 })

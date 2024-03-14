@@ -1,64 +1,71 @@
-import React, {useState, useContext, useRef, useEffect} from 'react'
-import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native'
-import {ChargeCardStat} from './ChargeCardStat'
-import {updateChargesForType} from '../db/vehicleTypesDb'
-import {StateContext} from '../context/StateContext'
+import React, { useState, useContext, useRef, useEffect } from 'react'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput
+} from 'react-native'
+import { ChargeCardStat } from './ChargeCardStat'
+import { updateChargesForType } from '../db/vehicleTypesDb'
+import { StateContext } from '../context/StateContext'
 
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#000807',
     marginBottom: 16,
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 8
   },
   title: {
     fontSize: 25,
     marginBottom: 8,
+    color: '#B3B7EE'
   },
   text: {
     fontSize: 16,
     marginTop: 8,
+    color: '#B3B7EE'
   },
   btnWrapper: {
     marginTop: 16,
     flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   editButton: {
     padding: 6,
     backgroundColor: '#45F0DF',
     width: 80,
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: 8
   },
   cancelBtn: {
     backgroundColor: '#E27373',
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 8,
-    color: '#000807',
+    color: '#000807'
   },
   editBtnTxt: {
     fontSize: 18,
-    color: '#000807',
-  },
+    color: '#000807'
+  }
 })
 
 export const ChargeCard = props => {
   const [showInput, setShowInput] = useState(false)
   const [price, setPrice] = useState('')
   const [displayPrice, setDisplayPrice] = useState(props.charge)
-  const {updateVehicleTypes, displayError} = useContext(StateContext)
+  const { updateVehicleTypes, displayError } = useContext(StateContext)
   const inputRef = useRef(null)
 
   const handleSubmit = async () => {
     try {
       const parseCharge = parseFloat(price)
-      if (isNaN(parseCharge)) 
-        return displayError('Preço inválido')
+      if (isNaN(parseCharge)) return displayError('Preço inválido')
 
       await updateChargesForType(props.name, {
-        [props.chargeParam]: parseFloat(price),
+        [props.chargeParam]: parseFloat(price)
       })
       await updateVehicleTypes()
       setDisplayPrice(price)
@@ -111,13 +118,15 @@ export const ChargeCard = props => {
       <View style={styles.btnWrapper}>
         <TouchableOpacity
           style={styles.editButton}
-          onPress={() => handleEdit()}>
+          onPress={() => handleEdit()}
+        >
           <Text style={styles.editBtnTxt}>Editar</Text>
         </TouchableOpacity>
         {showInput && (
           <TouchableOpacity
             style={styles.cancelBtn}
-            onPress={() => setShowInput(false)}>
+            onPress={() => setShowInput(false)}
+          >
             <Text style={styles.editBtnTxt}>Cancelar</Text>
           </TouchableOpacity>
         )}

@@ -1,65 +1,63 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import {
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
-  ScrollView,
+  ScrollView
 } from 'react-native'
-import {StateContext} from '../context/StateContext'
-import {deleteType} from '../db/vehicleTypesDb'
-import {ChargeCard} from '../components/ChargeCard'
-import {NewNameModal} from '../components/NewNameModal'
-
+import { StateContext } from '../context/StateContext'
+import { deleteType } from '../db/vehicleTypesDb'
+import { ChargeCard } from '../components/ChargeCard'
+import { NewNameModal } from '../components/NewNameModal'
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: '#B3B7EE',
+    backgroundColor: '#B3B7EE'
   },
   padding: {
-    padding: 8,
+    padding: 8
   },
   divider: {
     color: '#000807',
     fontSize: 25,
     fontWeight: '600',
-    marginVertical: 16,
+    marginVertical: 16
   },
   btnWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   deleteBtn: {
     alignItems: 'center',
     backgroundColor: '#E27373',
     padding: 10,
     borderRadius: 8,
-    marginBottom: 8,
+    marginBottom: 8
   },
   deleteBtnTxt: {
     fontSize: 20,
     paddingHorizontal: 6,
-    color: '#000807',
+    color: '#000807'
   },
   editBtn: {
     alignItems: 'center',
     backgroundColor: '#648DE5',
     padding: 10,
     borderRadius: 8,
-    marginBottom: 8,
+    marginBottom: 8
   },
   editBtnTxt: {
     fontSize: 20,
     paddingHorizontal: 6,
-    color: '#000807',
-  },
+    color: '#000807'
+  }
 })
 
-export const SelectedChargeScreen = ({route, navigation}) => {
-  const {updateVehicleTypes} = useContext(StateContext)
-  const {name, minFee, hourCharge, timeCharge, firstHourCharge} =
-    route.params
+export const SelectedChargeScreen = ({ route, navigation }) => {
+  const { updateVehicleTypes } = useContext(StateContext)
+  const { name, minFee, hourCharge, timeCharge, firstHourCharge } = route.params
   const [showModal, setShowModal] = useState(false)
 
   const deleteVehicleType = async () => {
@@ -114,13 +112,15 @@ export const SelectedChargeScreen = ({route, navigation}) => {
           <TouchableOpacity
             style={styles.deleteBtn}
             activeOpacity={0.8}
-            onPress={() => deleteVehicleType()}>
+            onPress={() => deleteVehicleType()}
+          >
             <Text style={styles.deleteBtnTxt}>Excluir</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.editBtn}
             activeOpacity={0.8}
-            onPress={() => setShowModal(true)}>
+            onPress={() => setShowModal(true)}
+          >
             <Text style={styles.editBtnTxt}>Mudar nome</Text>
           </TouchableOpacity>
         </View>

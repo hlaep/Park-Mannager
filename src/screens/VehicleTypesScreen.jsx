@@ -1,17 +1,17 @@
-import React, {useContext, useEffect} from 'react'
-import {StyleSheet, ScrollView} from 'react-native'
-import {StateContext} from '../context/StateContext'
-import {AddNewVehicleTypeButton} from '../components/AddNewVehicleTypeButton'
-import {VehicleTypeButton} from '../components/VehicleTypeButton'
+import React, { useContext, useEffect } from 'react'
+import { StyleSheet, ScrollView } from 'react-native'
+import { StateContext } from '../context/StateContext'
+import { AddNewVehicleTypeButton } from '../components/AddNewVehicleTypeButton'
+import { VehicleTypeButton } from '../components/VehicleTypeButton'
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     padding: 8,
-    backgroundColor: '#B3B7EE',
+    backgroundColor: '#B3B7EE'
   },
   text: {
-    color: 'black',
+    color: 'black'
   },
   toggle: {
     backgroundColor: '#000807',
@@ -19,19 +19,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
-    marginBottom: 8,
+    marginBottom: 8
   },
   toggleText: {
-    fontSize: 22,
+    fontSize: 22
   },
   img: {
     height: 60,
-    width: 60,
-  },
+    width: 60
+  }
 })
 
 export const VehicleTypesScreen = () => {
-  const {vehicleTypes, updateVehicleTypes} = useContext(StateContext)
+  const { vehicleTypes, updateVehicleTypes } = useContext(StateContext)
 
   useEffect(() => {
     updateVehicleTypes()

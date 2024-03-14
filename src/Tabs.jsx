@@ -9,6 +9,7 @@ import { StateContext } from './context/StateContext'
 import { ErrorMessage } from './components/ErrorMessage'
 
 const Tab = createBottomTabNavigator()
+
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const Tabs = () => {
+export const Tabs = () => {
   const { showError, errorTxt } = useContext(StateContext)
   return (
     <View style={styles.wrapper}>
@@ -113,5 +114,3 @@ const Tabs = () => {
     </View>
   )
 }
-
-export default Tabs

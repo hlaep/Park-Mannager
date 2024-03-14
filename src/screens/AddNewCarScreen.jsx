@@ -1,63 +1,62 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {
   Text,
   View,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  TouchableHighlight,
+  TouchableHighlight
 } from 'react-native'
-import {VehicleType} from '../components/VehicleType'
-import {StateContext} from '../context/StateContext'
-import {addParkingCar} from '../db/parkingCarsDb.js'
+import { VehicleType } from '../components/VehicleType'
+import { StateContext } from '../context/StateContext'
+import { addParkingCar } from '../db/parkingCarsDb.js'
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingHorizontal: 16,
-    paddingTop: 8,
-    backgroundColor: '#B3B7EE',
+    backgroundColor: '#B3B7EE'
   },
   input: {
     borderColor: '#000807',
     borderWidth: 1,
     color: '#000807',
-    padding: 8,
+    padding: 8
   },
   text: {
     color: '#000807',
-    fontSize: 20,
+    fontSize: 20
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginTop: 16,
+    marginTop: 16
   },
   button: {
     backgroundColor: '#000807',
     color: '#B3B7EE',
     paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 6,
+    borderRadius: 6
   },
   buttonText: {
     color: '#B3B7EE',
-    fontSize: 20,
+    fontSize: 20
   },
   typesWrapper: {
     marginVertical: 16,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    gap: 10,
-  },
+    gap: 10
+  }
 })
 
-export const AddNewCarScreen = ({navigation}) => {
+export const AddNewCarScreen = ({ navigation }) => {
   const [sign, setSign] = useState('')
   const [name, setName] = useState('')
   const [selectedType, setSelectedType] = useState(null)
-  const {updateCars, displayError, vehicleTypes, updateVehicleTypes} =
+  const { updateCars, displayError, vehicleTypes, updateVehicleTypes } =
     useContext(StateContext)
 
   const addNewCar = async () => {
@@ -70,7 +69,7 @@ export const AddNewCarScreen = ({navigation}) => {
       sign,
       name,
       type: selectedType,
-      parking: true,
+      parking: true
     }
 
     await addParkingCar(newCar)
