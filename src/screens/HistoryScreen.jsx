@@ -9,115 +9,54 @@ import {
 import { StateContext } from '../context/StateContext'
 import { CarOfHistory } from '../components/CarOfHistory'
 import { clearHistory } from '../db/parkingCarsDb'
+import {
+  getFullDate,
+  checkDuplicates,
+  checkDuplicateDate,
+  getDatesToShow
+} from '../logics'
 
 export const HistoryScreen = () => {
   const { cars } = useContext(StateContext)
-  const [displayCars, setDisplayCars] = useState([])
-  const datesToDisplay = [new Date()]
-  const tickets = cars
-    .filter(car => car.parking === false)
-    .sort((a, b) => b.exitTime - a.exitTime)
-
-  const getFullDate = time => {
-    let date = time
-    if (typeof time === 'number') date = new Date(time)
-    const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }
-    return date.toLocaleDateString(undefined, options)
-  }
-
-  const datesToAdd = shownDates => {
-    const datesOfTickets = tickets.map(ticket => getFullDate(ticket.exitTime))
-    const datesWithTickets = Array.from(new Set(datesOfTickets))
-    const queueOfDatesToAdd = datesWithTickets.filter(date => {
-      return !shownDates.find(shownDate => getFullDate(shownDate) === date)
-    })
-    return queueOfDatesToAdd
-  }
+  const historyVehicles = cars.filter(car => !car.parking)
+  const [shownHistoryVehicles, setShownHistoryVehicles] = useState([])
+  let searchDepth = 0
 
   useEffect(() => {
-    const carsNDateTitles = getCarsWithDateTitles()
-    if (carsNDateTitles) setDisplayCars(carsNDateTitles)
+    //Update the UI whenever a new car is added to the database
+    getVehiclesToShow()
   }, [cars])
 
-  const getYesterdayOfDate = date => {
-    const currentTimestamp = date.getTime()
-    const oneDayMilliseconds = 24 * 60 * 60 * 1000
-    const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds
-    return new Date(dayBeforeTimestamp)
-  }
+  const getVehiclesToShow = () => {
+    const dates = getDatesToShow(
+      searchDepth,
+      historyVehicles.map(obj => obj.exitTime)
+    )
+    console.log('Dates from getDatesToShow()', dates)
+    const vehiclesToShow = []
 
-  const getTicketsOfDate = (inputDate, tickets) => {
-    const ticketsOfDate = []
-
-    tickets.forEach(ticket => {
-      const exitDate = new Date(ticket.exitTime)
-      if (
-        exitDate.getDate() === inputDate.getDate() &&
-        exitDate.getMonth() === inputDate.getMonth() &&
-        exitDate.getFullYear() === inputDate.getFullYear()
-      ) {
-        ticketsOfDate.push(ticket)
+    historyVehicles.forEach(vehicle => {
+      if (checkDuplicateDate(vehicle.exitTime, dates)) {
+        vehiclesToShow.push(vehicle)
       }
     })
-
-    return ticketsOfDate
-  }
-
-  const getCarsWithDateTitles = () => {
-    if (tickets < 1) return
-    const toDisplay = []
-
-    const pushTitleNtickets = (title, date) => {
-      const dateTickets = getTicketsOfDate(date, tickets)
-      if (dateTickets.length < 1) {
-        return null
-      } else {
-        toDisplay.push(
-          <View key={title} style={styles.centerTitle}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
-        )
-        getTicketsOfDate(date, tickets).forEach(ticket =>
-          toDisplay.push(<CarOfHistory key={ticket.id} {...ticket} />)
-        )
-      }
-    }
-
-    datesToDisplay.forEach(date => {
-      switch (getFullDate(date)) {
-        case getFullDate(new Date()):
-          pushTitleNtickets('Hoje', date)
-          break
-        case getFullDate(getYesterdayOfDate(new Date())):
-          pushTitleNtickets('Ontem', date)
-          break
-        default:
-          pushTitleNtickets(date.toLocaleString('pt-BR').split(' ')[0], date)
-      }
-    })
-
-    return toDisplay
+    setShownHistoryVehicles([...shownHistoryVehicles, ...vehiclesToShow])
   }
 
   const handleShowMore = () => {
-    const datesWithTickets = datesToAdd(datesToDisplay)
-    console.log(datesWithTickets)
-    console.log(getFullDate(tickets[0].exitTime))
+    // Update the UI by calling getVehiclesToShow, that changes shownVehicleTypes state.
+    searchDepth++
+    getVehiclesToShow()
   }
   return (
     <View style={styles.wrapper}>
-      {tickets.length < 1 && (
+      {historyVehicles.length < 1 && (
         <View style={styles.center}>
           <Text style={styles.txt}>Não há nenhum veículo no histórico.</Text>
         </View>
       )}
 
-      {displayCars?.length < 1 && tickets.length >= 1 && (
+      {shownHistoryVehicles.length < 1 && historyVehicles.length >= 1 && (
         <View style={styles.center}>
           <Text style={styles.txt}>
             Não há nenhum veículo no histórico de hoje.
@@ -127,9 +66,11 @@ export const HistoryScreen = () => {
           </TouchableOpacity>
         </View>
       )}
-      {displayCars?.length >= 1 && (
+      {shownHistoryVehicles?.length >= 1 && (
         <ScrollView style={styles.scrollView}>
-          {displayCars.map(item => item)}
+          {shownHistoryVehicles.map(item => (
+            <CarOfHistory {...item} key={item.id} />
+          ))}
           <View style={styles.center}>
             <TouchableOpacity
               style={styles.btn}

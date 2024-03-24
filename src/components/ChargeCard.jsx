@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: '#B3B7EE'
   },
+  input: {
+    color: '#B3B7EE'
+  },
   text: {
     fontSize: 16,
     marginTop: 8,
@@ -111,6 +114,7 @@ export const ChargeCard = props => {
           value={price}
           onChangeText={handlePriceChange}
           onSubmitEditing={() => handleSubmit()}
+          style={styles.input}
         />
       )}
 
