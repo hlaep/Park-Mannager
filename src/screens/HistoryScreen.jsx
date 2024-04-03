@@ -43,7 +43,7 @@ export const HistoryScreen = () => {
     })
     setShownHistoryVehicles(vehiclesToShow)
   }
-
+  //jooj
   const handleShowMore = () => {
     // Update the UI by calling getVehiclesToShow, that changes shownVehicleTypes state.
     setSearchDepth(prevState => {
