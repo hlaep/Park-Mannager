@@ -11,7 +11,7 @@ import { CarOfHistory } from '../components/CarOfHistory'
 import { clearHistory } from '../db/parkingCarsDb'
 import {
   getFullDate,
-  checkDuplicates,
+  checkDuplicate,
   checkDuplicateDate,
   getDatesToShow
 } from '../logics'
@@ -20,19 +20,20 @@ export const HistoryScreen = () => {
   const { cars } = useContext(StateContext)
   const historyVehicles = cars.filter(car => !car.parking)
   const [shownHistoryVehicles, setShownHistoryVehicles] = useState([])
-  let searchDepth = 0
+  const [searchDepth, setSearchDepth] = useState(0)
 
   useEffect(() => {
     //Update the UI whenever a new car is added to the database
-    getVehiclesToShow()
+    getVehiclesToShow(searchDepth)
+    console.log('updatedHistoryCars')
   }, [cars])
 
-  const getVehiclesToShow = () => {
+  const getVehiclesToShow = searchIndex => {
     const dates = getDatesToShow(
-      searchDepth,
+      searchIndex,
       historyVehicles.map(obj => obj.exitTime)
     )
-    console.log('Dates from getDatesToShow()', dates)
+
     const vehiclesToShow = []
 
     historyVehicles.forEach(vehicle => {
@@ -40,14 +41,18 @@ export const HistoryScreen = () => {
         vehiclesToShow.push(vehicle)
       }
     })
-    setShownHistoryVehicles([...shownHistoryVehicles, ...vehiclesToShow])
+    setShownHistoryVehicles(vehiclesToShow)
   }
 
   const handleShowMore = () => {
     // Update the UI by calling getVehiclesToShow, that changes shownVehicleTypes state.
-    searchDepth++
-    getVehiclesToShow()
+    setSearchDepth(prevState => {
+      const updatedDepth = prevState + 1
+      getVehiclesToShow(updatedDepth)
+      return updatedDepth
+    })
   }
+
   return (
     <View style={styles.wrapper}>
       {historyVehicles.length < 1 && (

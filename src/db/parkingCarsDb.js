@@ -16,15 +16,15 @@ export const clearParkingCars = async () => {
   try {
     await AsyncStorage.removeItem('cars')
   } catch (e) {
-    return {message: 'Error when trying to clear list', e}
+    return { message: 'Error when trying to clear list', e }
   }
 }
 
 const createList = async () => {
   try {
-    await setList({cars: []})
+    await setList({ cars: [] })
   } catch (e) {
-    return {message: 'Error at createList at parkingCarsDb', e}
+    return { message: 'Error at createList at parkingCarsDb', e }
   }
 }
 
@@ -35,7 +35,7 @@ export const getCars = async () => {
     const data = JSON.parse(response)
     return data
   } catch (e) {
-    return {message: `Error at getList at parkingCarsDb: `, e}
+    return { message: `Error at getList at parkingCarsDb: `, e }
   }
 }
 
@@ -45,7 +45,7 @@ const uniqueId = () =>
 export const addParkingCar = async item => {
   const newItem = {
     ...item,
-    id: uniqueId(),
+    id: uniqueId()
   }
 
   try {
@@ -53,14 +53,14 @@ export const addParkingCar = async item => {
     listArr = response['cars']
 
     const newList = {
-      cars: [...listArr, newItem],
+      cars: [...listArr, newItem]
     }
 
     await setList(newList)
   } catch (e) {
     return {
       message: `Error when adding item "${item}" at addParkingCar at parkingCarsDb`,
-      e,
+      e
     }
   }
 }
@@ -72,14 +72,14 @@ export const deleteParkingCar = async itemId => {
 
     const newArr = listArr.filter(item => item.id !== itemId)
     const newList = {
-      cars: newArr,
+      cars: newArr
     }
 
     await setList(newList)
   } catch (e) {
     return {
       message: `Error deleting item : "${itemId}" at deleteParkingCar at parkingCarsDb: `,
-      e,
+      e
     }
   }
 }
@@ -87,7 +87,7 @@ export const deleteParkingCar = async itemId => {
 const getYesterdayOfDate = date => {
   const currentTimestamp = date
   const oneDayMilliseconds = 24 * 60 * 60 * 1000
-  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds
+  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds * 11
   return dayBeforeTimestamp
 }
 
@@ -104,21 +104,27 @@ export const updateParking = async (id, price, time) => {
           parking: false,
           price,
           time,
-          exitTime: Date.now(),
-        },
-      ],
+          exitTime: getYesterdayOfDate(Date.now())
+        }
+      ]
     }
     setList(updatedList)
   } catch (e) {
-    return {message: 'Error when trying to update parking: ', e}
+    return { message: 'Error when trying to update parking: ', e }
   }
 }
 
 export const clearHistory = async () => {
   try {
     const response = await getCars()
-    const filteredArr = response.cars.filter(car => car.parking === true)
+    const arrWithoutHistoryCars = response.cars.filter(
+      car => car.parking === true
+    )
+    const newList = {
+      cars: arrWithoutHistoryCars
+    }
+    await setList(newList)
   } catch (e) {
-    return {message: 'Erro when Trying to clear history', e}
+    return { message: 'Erro when Trying to clear history', e }
   }
 }

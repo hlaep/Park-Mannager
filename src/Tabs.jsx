@@ -5,6 +5,7 @@ import { HomeScreen } from './screens/HomeScreen'
 import { AddNewCarScreen } from './screens/AddNewCarScreen'
 import { ChargeScreenNav } from './screens/ChargeScreenNav'
 import { HistoryScreen } from './screens/HistoryScreen'
+import { SettingsScreen } from './screens/SettingsScreen'
 import { StateContext } from './context/StateContext'
 import { ErrorMessage } from './components/ErrorMessage'
 
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
     height: 60
   },
   icon: {
-    width: 40,
-    height: 40
+    width: 35,
+    height: 35
   }
 })
 
@@ -103,6 +104,25 @@ export const Tabs = () => {
               ) : (
                 <Image
                   source={require('./img/money.png')}
+                  style={styles.icon}
+                />
+              )
+            }
+          }}
+        />
+        <Tab.Screen
+          name="Settings screen"
+          component={SettingsScreen}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return focused ? (
+                <Image
+                  source={require('./img/settings-focused.png')}
+                  style={styles.icon}
+                />
+              ) : (
+                <Image
+                  source={require('./img/settings.png')}
                   style={styles.icon}
                 />
               )
