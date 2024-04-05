@@ -20,7 +20,7 @@ export const getDatesToShow = (searchDepth, datesWithTickets) => {
   const sortedDates = datesWithTickets.sort((a, b) => b - a)
   const sortedDatesString = sortedDates.map(date => getFullDate(date))
   const uniqueDates = Array.from(new Set(sortedDatesString))
-  const datesToReturn = []
+  const datesToReturn = [getFullDate(new Date())]
   for (let i = 0; i < uniqueDates.length; i++) {
     if (i > searchDepth) break
     datesToReturn.push(uniqueDates[i])
