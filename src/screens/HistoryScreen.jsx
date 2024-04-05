@@ -57,10 +57,10 @@ export const HistoryScreen = () => {
     <View style={styles.wrapper}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => moveToOlderDate()}>
-          <Image source={require('../img/arrow-pointing-left')} />
+          <Image source={require('../img/arrow-pointing-left.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => moveToNewerDate()}>
-          <Image source={require('../img/arrow-pointing-left')} />
+          <Image source={require('../img/arrow-pointing-left.png')} />
         </TouchableOpacity>
       </View>
     </View>
