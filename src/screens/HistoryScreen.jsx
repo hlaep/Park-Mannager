@@ -26,29 +26,11 @@ export const HistoryScreen = () => {
   useEffect(() => {
     //Update the UI whenever a new car is added to the database
     getVehiclesToShow()
-    console.log('updatedHistoryCars')
   }, [cars])
 
   const getVehiclesToShow = () => {
     const currentDateTickets = getTicketsOfDate(currentDate, historyVehicles)
-
-    const vehiclesToShow = []
-
-    historyVehicles.forEach(vehicle => {
-      if (checkDuplicateDate(vehicle.exitTime, dates)) {
-        vehiclesToShow.push(vehicle)
-      }
-    })
-    setShownHistoryVehicles(vehiclesToShow)
-  }
-
-  const handleShowMore = () => {
-    // Update the UI by calling getVehiclesToShow, that changes shownVehicleTypes state.
-    setSearchDepth(prevState => {
-      const updatedDepth = prevState + 1
-      getVehiclesToShow(updatedDepth)
-      return updatedDepth
-    })
+    setShownHistoryVehicles(currentDateTickets)
   }
 
   return (
@@ -68,7 +50,9 @@ export const HistoryScreen = () => {
           />
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.mainList}></ScrollView>
+      <ScrollView style={styles.mainList}>
+        {shownHistoryVehicles.map(vehicle => {})}
+      </ScrollView>
     </View>
   )
 }
