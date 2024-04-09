@@ -9,14 +9,7 @@ import {
 } from 'react-native'
 import { StateContext } from '../context/StateContext'
 import { CarOfHistory } from '../components/CarOfHistory'
-import { clearHistory } from '../db/parkingCarsDb'
-import {
-  getFullDate,
-  checkDuplicate,
-  checkDuplicateDate,
-  getLatestDateBeforeDate,
-  getTicketsOfDate
-} from '../logics'
+import { getLatestDateBeforeDate, getTicketsOfDate } from '../logics'
 
 export const HistoryScreen = () => {
   const { cars } = useContext(StateContext)
@@ -25,19 +18,22 @@ export const HistoryScreen = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
 
   useEffect(() => {
-    //Update the UI whenever a new car is added to the database
+    //Update the UI whenever a new car is added to the database or current da
     getVehiclesToShow()
   }, [cars])
 
   const getVehiclesToShow = () => {
     const currentDateTickets = getTicketsOfDate(currentDate, historyVehicles)
-    console.log(currentDateTickets)
     setShownHistoryVehicles(currentDateTickets)
   }
 
   const moveToOlderDate = () => {
     //get the latest date before this date
-    getLatestDateBeforeDate(currentDate)
+    const latestDate = getLatestDateBeforeDate(
+      currentDate,
+      historyVehicles.map(vehicle => vehicle.exitTime)
+    )
+    setCurrentDate(latestDate)
   }
 
   return (

@@ -13,11 +13,34 @@ export const getFullDate = date => {
 
   return `${day}/${month}/${year}`
 }
+const sortByTimeAndRemoveDuplicates = dates => {
+  const sortedDates = dates.sort((a, b) => b - a)
+  const sortedDatesString = sortedDates.map(date => getFullDate(date))
+  const uniqueDates = Array.from(new Set(sortedDatesString))
+  return uniqueDates
+}
 
-export const getLatestDateBeforeDate = date => {}
+export const getLatestDateBeforeDate = (currentDate, allDates) => {
+  const sortedDates = sortByTimeAndRemoveDuplicates(allDates)
+  let latestDate
+  sortedDates.forEach((date, index) => {
+    if (date === getFullDate(currentDate)) {
+      latestDate = sortedDates[index + 1]
+    }
+  })
+  if (latestDate === undefined) return currentDate
+  return latestDate
+}
 
-export const getTicketsOfDate = (date, tickets) =>
-  tickets.filter(ticket => getFullDate(ticket.exitTime) === getFullDate(date))
+export const getTicketsOfDate = (date, tickets) => {
+  if (!date) throw Error('Date is undefined, at getTicketsOfDate')
+  if (typeof date === 'string') {
+    // if date is already treated to dd/mm/yyyy string format
+    return tickets.filter(ticket => getFullDate(ticket.exitTime) === date)
+  } else {
+    tickets.filter(ticket => getFullDate(ticket.exitTime) === getFullDate(date))
+  }
+}
 
 // Others
 export const checkDuplicate = (item, arr) => {
