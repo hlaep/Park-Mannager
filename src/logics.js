@@ -14,19 +14,8 @@ export const getFullDate = date => {
   return `${day}/${month}/${year}`
 }
 
-export const getDatesToShow = (searchDepth, datesWithTickets) => {
-  if (isNaN(searchDepth))
-    return console.error('searchDepth is not a number, at getDatesToShow')
-  const sortedDates = datesWithTickets.sort((a, b) => b - a)
-  const sortedDatesString = sortedDates.map(date => getFullDate(date))
-  const uniqueDates = Array.from(new Set(sortedDatesString))
-  const datesToReturn = [getFullDate(new Date())]
-  for (let i = 0; i < uniqueDates.length; i++) {
-    if (i > searchDepth) break
-    datesToReturn.push(uniqueDates[i])
-  }
-  return datesToReturn
-}
+export const getTicketsOfDate = (date, tickets) =>
+  tickets.filte(ticket => getFullDate(ticket.exitTime) === getFullDate(date))
 
 // Others
 export const checkDuplicate = (item, arr) => {

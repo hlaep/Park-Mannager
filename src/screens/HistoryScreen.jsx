@@ -4,7 +4,8 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native'
 import { StateContext } from '../context/StateContext'
 import { CarOfHistory } from '../components/CarOfHistory'
@@ -13,26 +14,23 @@ import {
   getFullDate,
   checkDuplicate,
   checkDuplicateDate,
-  getDatesToShow
+  getTicketsOfDate
 } from '../logics'
 
 export const HistoryScreen = () => {
   const { cars } = useContext(StateContext)
   const historyVehicles = cars.filter(car => !car.parking)
   const [shownHistoryVehicles, setShownHistoryVehicles] = useState([])
-  const [searchDepth, setSearchDepth] = useState(0)
+  const [currentDate, setCurrentDate] = useState(new Date())
 
   useEffect(() => {
     //Update the UI whenever a new car is added to the database
-    getVehiclesToShow(searchDepth)
+    getVehiclesToShow()
     console.log('updatedHistoryCars')
   }, [cars])
 
-  const getVehiclesToShow = searchIndex => {
-    const dates = getDatesToShow(
-      searchIndex,
-      historyVehicles.map(obj => obj.exitTime)
-    )
+  const getVehiclesToShow = () => {
+    const currentDateTickets = getTicketsOfDate(currentDate, historyVehicles)
 
     const vehiclesToShow = []
 
@@ -57,12 +55,20 @@ export const HistoryScreen = () => {
     <View style={styles.wrapper}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => moveToOlderDate()}>
-          <Image source={require('../img/arrow-pointing-left.png')} />
+          <Image
+            source={require('../img/arrow-pointing-right.png')}
+            style={styles.img}
+          />
         </TouchableOpacity>
+        <Text style={styles.headerTxt}>Hoje</Text>
         <TouchableOpacity onPress={() => moveToNewerDate()}>
-          <Image source={require('../img/arrow-pointing-left.png')} />
+          <Image
+            source={require('../img/arrow-pointing-left.png')}
+            style={styles.img}
+          />
         </TouchableOpacity>
       </View>
+      <ScrollView style={styles.mainList}></ScrollView>
     </View>
   )
 }
@@ -74,6 +80,18 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#000807',
-    width: '100%'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    padding: 10
+  },
+  img: {
+    height: 40,
+    width: 40
+  },
+  headerTxt: {
+    color: '#45F0DF',
+    fontSize: 22
   }
 })
