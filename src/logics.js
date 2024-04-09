@@ -14,6 +14,8 @@ export const getFullDate = date => {
   return `${day}/${month}/${year}`
 }
 
+export const getLatestDateBeforeDate = date => {}
+
 export const getTicketsOfDate = (date, tickets) =>
   tickets.filter(ticket => getFullDate(ticket.exitTime) === getFullDate(date))
 
