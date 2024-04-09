@@ -15,7 +15,7 @@ export const getFullDate = date => {
 }
 
 export const getTicketsOfDate = (date, tickets) =>
-  tickets.filte(ticket => getFullDate(ticket.exitTime) === getFullDate(date))
+  tickets.filter(ticket => getFullDate(ticket.exitTime) === getFullDate(date))
 
 // Others
 export const checkDuplicate = (item, arr) => {

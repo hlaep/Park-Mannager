@@ -1,26 +1,26 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 const styles = StyleSheet.create({
   wrapper: {
     borderBottomColor: 'black',
     borderBottomWidth: 1,
-    paddingVertical: 16,
-    flex: 1,
+    padding: 16,
+    flex: 1
   },
   txt: {
     fontSize: 16,
     color: 'black',
-    textTransform: 'capitalize',
+    textTransform: 'capitalize'
   },
   info: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   sign: {
-    textTransform: 'uppercase',
-  },
+    textTransform: 'uppercase'
+  }
 })
 
 export const CarOfHistory = props => {

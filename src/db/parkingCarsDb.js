@@ -104,7 +104,7 @@ export const updateParking = async (id, price, time) => {
           parking: false,
           price,
           time,
-          exitTime: getYesterdayOfDate(Date.now())
+          exitTime: Date.now()
         }
       ]
     }

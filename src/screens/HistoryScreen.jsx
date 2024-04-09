@@ -14,6 +14,7 @@ import {
   getFullDate,
   checkDuplicate,
   checkDuplicateDate,
+  getLatestDateBeforeDate,
   getTicketsOfDate
 } from '../logics'
 
@@ -30,7 +31,13 @@ export const HistoryScreen = () => {
 
   const getVehiclesToShow = () => {
     const currentDateTickets = getTicketsOfDate(currentDate, historyVehicles)
+    console.log(currentDateTickets)
     setShownHistoryVehicles(currentDateTickets)
+  }
+
+  const moveToOlderDate = () => {
+    //get the latest date before this date
+    getLatestDateBeforeDate(currentDate)
   }
 
   return (
@@ -51,7 +58,9 @@ export const HistoryScreen = () => {
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.mainList}>
-        {shownHistoryVehicles.map(vehicle => {})}
+        {shownHistoryVehicles.map(item => (
+          <CarOfHistory {...item} key={item.id} />
+        ))}
       </ScrollView>
     </View>
   )
