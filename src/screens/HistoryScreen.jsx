@@ -9,7 +9,11 @@ import {
 } from 'react-native'
 import { StateContext } from '../context/StateContext'
 import { CarOfHistory } from '../components/CarOfHistory'
-import { getLatestDateBeforeDate, getTicketsOfDate } from '../logics'
+import {
+  getDateBeforeOrAfterDate,
+  getTicketsOfDate,
+  getDateName
+} from '../dateLogics'
 
 export const HistoryScreen = () => {
   const { cars } = useContext(StateContext)
@@ -18,35 +22,37 @@ export const HistoryScreen = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
 
   useEffect(() => {
-    //Update the UI whenever a new car is added to the database or current da
+    //Update the UI whenever a new car is added to the database or current date changes
     getVehiclesToShow()
-  }, [cars])
+  }, [cars, currentDate])
 
   const getVehiclesToShow = () => {
     const currentDateTickets = getTicketsOfDate(currentDate, historyVehicles)
+
     setShownHistoryVehicles(currentDateTickets)
   }
 
-  const moveToOlderDate = () => {
-    //get the latest date before this date
-    const latestDate = getLatestDateBeforeDate(
+  const changeDate = direction => {
+    const isOlder = direction === 'older' ? true : false
+    const olderOrNewerDate = getDateBeforeOrAfterDate(
       currentDate,
-      historyVehicles.map(vehicle => vehicle.exitTime)
+      historyVehicles.map(vehicle => vehicle.exitTime),
+      isOlder
     )
-    setCurrentDate(latestDate)
+    if (olderOrNewerDate) setCurrentDate(olderOrNewerDate)
   }
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => moveToOlderDate()}>
+        <TouchableOpacity onPress={() => changeDate('older')}>
           <Image
             source={require('../img/arrow-pointing-right.png')}
             style={styles.img}
           />
         </TouchableOpacity>
-        <Text style={styles.headerTxt}>Hoje</Text>
-        <TouchableOpacity onPress={() => moveToNewerDate()}>
+        <Text style={styles.headerTxt}>{getDateName(currentDate)}</Text>
+        <TouchableOpacity onPress={() => changeDate('newer')}>
           <Image
             source={require('../img/arrow-pointing-left.png')}
             style={styles.img}

@@ -87,7 +87,7 @@ export const deleteParkingCar = async itemId => {
 const getYesterdayOfDate = date => {
   const currentTimestamp = date
   const oneDayMilliseconds = 24 * 60 * 60 * 1000
-  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds * 11
+  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds
   return dayBeforeTimestamp
 }
 
@@ -104,7 +104,7 @@ export const updateParking = async (id, price, time) => {
           parking: false,
           price,
           time,
-          exitTime: Date.now()
+          exitTime: getYesterdayOfDate(Date.now())
         }
       ]
     }
