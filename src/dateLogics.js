@@ -40,12 +40,10 @@ export const getDateBeforeOrAfterDate = (currentDate, allDates, before) => {
 export const getTicketsOfDate = (date, tickets) =>
   tickets.filter(ticket => getFullDate(ticket.exitTime) === getFullDate(date))
 
-const getYesterdayOfDate = (date, times) => {
-  const repeat = times || 1
-
+const getYesterdayOfDate = date => {
   const currentTimestamp = date
   const oneDayMilliseconds = 24 * 60 * 60 * 1000
-  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds * repeat
+  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds
   return dayBeforeTimestamp
 }
 
@@ -55,11 +53,9 @@ export const getDateName = date => {
   const today = getFullDate(new Date())
   switch (arbitraryDate) {
     case today:
-      return 'Hoje'
+      return 'Today'
     case getFullDate(getYesterdayOfDate(new Date())):
-      return 'Ontem'
-    //case getYesterdayOfDate(new Date(), 2):
-
+      return 'Yesterday'
     default:
       return arbitraryDate
   }

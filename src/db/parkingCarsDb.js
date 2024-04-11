@@ -84,10 +84,13 @@ export const deleteParkingCar = async itemId => {
   }
 }
 
-const getYesterdayOfDate = date => {
+const getYesterdayOfDate = (date, times) => {
+  // times is how many days back you want it to return, default is 1
+  const repeat = times || 1
+
   const currentTimestamp = date
   const oneDayMilliseconds = 24 * 60 * 60 * 1000
-  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds
+  const dayBeforeTimestamp = currentTimestamp - oneDayMilliseconds * repeat
   return dayBeforeTimestamp
 }
 
@@ -104,7 +107,7 @@ export const updateParking = async (id, price, time) => {
           parking: false,
           price,
           time,
-          exitTime: getYesterdayOfDate(Date.now())
+          exitTime: getYesterdayOfDate(Date.now(), 2)
         }
       ]
     }
