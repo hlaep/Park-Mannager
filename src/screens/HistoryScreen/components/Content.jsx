@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
-import { CarOfHistory } from '../components/CarOfHistory'
-import { NoVehiclesMessage } from '../components/NoVehiclesMessage'
+import { CarTicket } from './CarTicket'
+import { NoVehiclesMessage } from './NoVehiclesMessage'
 
 export const HistoryScreenContent = props => {
   return (
@@ -16,7 +16,7 @@ export const HistoryScreenContent = props => {
       )}
       <ScrollView>
         {props.shownHistoryVehicles.map(item => (
-          <CarOfHistory {...item} key={item.id} />
+          <CarTicket {...item} key={item.id} />
         ))}
       </ScrollView>
     </View>

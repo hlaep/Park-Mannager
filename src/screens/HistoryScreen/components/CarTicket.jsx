@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export const CarOfHistory = props => {
+export const CarTicket = props => {
   return (
     <View style={styles.wrapper}>
       <Info name={'Nome:'} value={props.name} />

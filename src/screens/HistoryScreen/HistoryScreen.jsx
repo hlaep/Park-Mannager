@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { StateContext } from '../context/StateContext'
+import { StateContext } from '../../context/StateContext'
 import {
   getDateBeforeOrAfterDate,
   getTicketsOfDate,
   getDateName
-} from '../dateLogics'
-import { HistoryScreenContent } from '../components/HistoryScreenContent'
-import { HistoryScreenHeader } from '../components/HistoryScreenHeader'
+} from './dateLogics'
+import { HistoryScreenContent } from './components/Content'
+import { HistoryScreenHeader } from './components/Header'
 
 export const HistoryScreen = () => {
   const { cars } = useContext(StateContext)
