@@ -17,9 +17,9 @@ export const SettingsScreen = () => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.option}>
-        <Text>Limpar histórico</Text>
+        <Text>Clear history</Text>
         <TouchableOpacity onPress={() => handleClearHistory()}>
-          <Text>Limpar</Text>
+          <Text>Clear</Text>
         </TouchableOpacity>
       </View>
     </View>

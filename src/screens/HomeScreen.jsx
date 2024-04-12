@@ -42,7 +42,7 @@ export const HomeScreen = () => {
     <View style={styles.wrapper}>
       {parkingCars?.length < 1 && (
         <View style={styles.centerText}>
-          <Text style={styles.text}>Não há nenhum veículo estacionado.</Text>
+          <Text style={styles.text}>There are no vehicles parking.</Text>
         </View>
       )}
       {parkingCars?.length >= 1 && (
