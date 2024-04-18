@@ -7,8 +7,8 @@ import {
   TextInput
 } from 'react-native'
 import { ChargeCardStat } from './ChargeCardStat'
-import { updateChargesForType } from '../db/vehicleTypesDb'
-import { StateContext } from '../context/StateContext'
+import { updateChargesForType } from '../../../db/vehicleTypesDb'
+import { StateContext } from '../../../context/StateContext'
 
 const styles = StyleSheet.create({
   wrapper: {

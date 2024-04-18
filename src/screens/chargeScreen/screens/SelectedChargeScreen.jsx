@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native'
-import { StateContext } from '../context/StateContext'
-import { deleteType } from '../db/vehicleTypesDb'
+import { StateContext } from '../../../context/StateContext'
+import { deleteType } from '../../../db/vehicleTypesDb'
 import { ChargeCard } from '../components/ChargeCard'
 import { NewNameModal } from '../components/NewNameModal'
 

@@ -1,8 +1,29 @@
 import React, { useContext, useEffect } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import { StateContext } from '../context/StateContext'
+import { StateContext } from '../../../context/StateContext'
 import { AddNewVehicleTypeButton } from '../components/AddNewVehicleTypeButton'
 import { VehicleTypeButton } from '../components/VehicleTypeButton'
+
+export const VehicleTypesScreen = () => {
+  const { vehicleTypes, updateVehicleTypes } = useContext(StateContext)
+
+  useEffect(() => {
+    updateVehicleTypes()
+  }, [])
+
+  return (
+    <ScrollView style={styles.wrapper}>
+      <AddNewVehicleTypeButton />
+      {vehicleTypes['allTypes'].map(type => (
+        <VehicleTypeButton
+          key={vehicleTypes[type].name}
+          name={vehicleTypes[type].name}
+          type={vehicleTypes[type]}
+        />
+      ))}
+    </ScrollView>
+  )
+}
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -29,24 +50,3 @@ const styles = StyleSheet.create({
     width: 60
   }
 })
-
-export const VehicleTypesScreen = () => {
-  const { vehicleTypes, updateVehicleTypes } = useContext(StateContext)
-
-  useEffect(() => {
-    updateVehicleTypes()
-  }, [])
-
-  return (
-    <ScrollView style={styles.wrapper}>
-      <AddNewVehicleTypeButton />
-      {vehicleTypes['allTypes'].map(type => (
-        <VehicleTypeButton
-          key={vehicleTypes[type].name}
-          name={vehicleTypes[type].name}
-          type={vehicleTypes[type]}
-        />
-      ))}
-    </ScrollView>
-  )
-}

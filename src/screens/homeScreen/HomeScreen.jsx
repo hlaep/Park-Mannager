@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import { ParkingCar } from '../components/ParkingCar'
-import { StateContext } from '../context/StateContext'
-import { clearTypes } from '../db/vehicleTypesDb'
-import { clearParkingCars } from '../db/parkingCarsDb'
+import { ParkingCar } from './components/ParkingCar'
+import { StateContext } from '../../context/StateContext'
+import { clearTypes } from '../../db/vehicleTypesDb'
+import { clearParkingCars } from '../../db/parkingCarsDb'
 
 const styles = StyleSheet.create({
   wrapper: {

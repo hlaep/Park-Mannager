@@ -1,14 +1,14 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
-import {getType} from '../db/vehicleTypesDb'
-import {deleteParkingCar, updateParking} from '../db/parkingCarsDb'
-import {StateContext} from '../context/StateContext'
+import React, { useState, useEffect, useContext } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { getType } from '../../../db/vehicleTypesDb'
+import { deleteParkingCar, updateParking } from '../../../db/parkingCarsDb'
+import { StateContext } from '../../../context/StateContext'
 
 export const ParkingCarActions = props => {
   const [price, setPrice] = useState(0)
   const [currentTime, setCurrentTime] = useState(Date.now() - props.createdAt)
   const [charges, setCharges] = useState(null)
-  const {vehicleTypes, updateCars, displayError} = useContext(StateContext)
+  const { vehicleTypes, updateCars, displayError } = useContext(StateContext)
 
   const finishParking = async () => {
     try {
@@ -51,9 +51,10 @@ export const ParkingCarActions = props => {
   }
 
   const formatPrice = price =>
-    new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(
-      price,
-    )
+    new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(price)
 
   const formatTime = time => {
     const timeToSec = time / 1000
@@ -121,23 +122,23 @@ export const ParkingCarActions = props => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   stats: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   actions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   text: {
     fontSize: 16,
     color: 'black',
-    textTransform: 'capitalize',
+    textTransform: 'capitalize'
   },
   img: {
     height: 30,
-    width: 30,
-  },
+    width: 30
+  }
 })

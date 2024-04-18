@@ -1,6 +1,6 @@
 import React from 'react'
-import {Text, View, StyleSheet} from 'react-native'
-import {ParkingCarActions} from './ParkingCarActions'
+import { Text, View, StyleSheet } from 'react-native'
+import { ParkingCarActions } from './ParkingCarActions'
 
 export const ParkingCar = props => (
   <View style={styles.wrapper}>
@@ -29,19 +29,19 @@ const styles = StyleSheet.create({
     height: 100,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   text: {
     fontSize: 16,
     color: 'black',
-    textTransform: 'capitalize',
+    textTransform: 'capitalize'
   },
   info: {
     flex: 1,
     flexBasis: '33%',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   sign: {
-    textTransform: 'uppercase',
-  },
+    textTransform: 'uppercase'
+  }
 })

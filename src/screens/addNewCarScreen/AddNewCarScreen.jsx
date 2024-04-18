@@ -4,12 +4,11 @@ import {
   View,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native'
-import { VehicleType } from '../components/VehicleType'
-import { StateContext } from '../context/StateContext'
-import { addParkingCar } from '../db/parkingCarsDb.js'
+import { VehicleType } from './components/VehicleType.jsx'
+import { StateContext } from '../../context/StateContext.jsx'
+import { addParkingCar } from '../../db/parkingCarsDb.js'
 
 const styles = StyleSheet.create({
   wrapper: {

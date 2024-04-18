@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Image, StyleSheet, View, Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeScreen } from './screens/HomeScreen'
-import { AddNewCarScreen } from './screens/AddNewCarScreen'
-import { ChargeScreenNav } from './screens/ChargeScreenNav'
-import { HistoryScreen } from './screens/HistoryScreen/HistoryScreen'
+import { HomeScreen } from './screens/homeScreen/HomeScreen'
+import { AddNewCarScreen } from './screens/addNewCarScreen/AddNewCarScreen'
+import { ChargeScreenNav } from './screens/chargeScreen/ChargeScreenNav'
+import { HistoryScreen } from './screens/historyScreen/HistoryScreen'
 import { SettingsScreen } from './screens/SettingsScreen'
 import { StateContext } from './context/StateContext'
 import { ErrorMessage } from './components/ErrorMessage'
@@ -43,7 +43,7 @@ export const Tabs = () => {
             tabBarIcon: ({ focused }) => {
               return focused ? (
                 <Image
-                  source={require('./img/parking-focused.png')}
+                  source={require('./img/focused/parking.png')}
                   style={styles.icon}
                 />
               ) : (
@@ -63,7 +63,7 @@ export const Tabs = () => {
               return focused ? (
                 <Image
                   style={styles.icon}
-                  source={require('./img/history-focused.png')}
+                  source={require('./img/focused/history.png')}
                 />
               ) : (
                 <Image
@@ -82,7 +82,7 @@ export const Tabs = () => {
             tabBarIcon: ({ focused }) => {
               return focused ? (
                 <Image
-                  source={require('./img/add-focused.png')}
+                  source={require('./img/focused/add.png')}
                   style={styles.icon}
                 />
               ) : (
@@ -98,7 +98,7 @@ export const Tabs = () => {
             tabBarIcon: ({ focused }) => {
               return focused ? (
                 <Image
-                  source={require('./img/money-focused.png')}
+                  source={require('./img/focused/money.png')}
                   style={styles.icon}
                 />
               ) : (
@@ -117,7 +117,7 @@ export const Tabs = () => {
             tabBarIcon: ({ focused }) => {
               return focused ? (
                 <Image
-                  source={require('./img/settings-focused.png')}
+                  source={require('./img/focused/settings.png')}
                   style={styles.icon}
                 />
               ) : (

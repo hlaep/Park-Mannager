@@ -7,8 +7,8 @@ import {
   TouchableHighlight,
   TextInput
 } from 'react-native'
-import { StateContext } from '../context/StateContext'
-import { addNewType } from '../db/vehicleTypesDb'
+import { StateContext } from '../../../context/StateContext'
+import { addNewType } from '../../../db/vehicleTypesDb'
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -88,7 +88,7 @@ export const AddNewVehicleTypeButton = props => {
           underlayColor="#000807"
         >
           <Image
-            source={require('../img/add-focused.png')}
+            source={require('../../../img/focused/add.png')}
             style={styles.img}
           />
         </TouchableHighlight>

@@ -6,8 +6,8 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native'
-import { StateContext } from '../context/StateContext'
-import { updateTypeName } from '../db/vehicleTypesDb'
+import { StateContext } from '../../../context/StateContext'
+import { updateTypeName } from '../../../db/vehicleTypesDb'
 
 const styles = StyleSheet.create({
   background: {
