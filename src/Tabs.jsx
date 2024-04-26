@@ -5,7 +5,7 @@ import { HomeScreen } from './screens/homeScreen/HomeScreen'
 import { AddNewCarScreen } from './screens/addNewCarScreen/AddNewCarScreen'
 import { ChargeScreenNav } from './screens/chargeScreen/ChargeScreenNav'
 import { HistoryScreen } from './screens/historyScreen/HistoryScreen'
-import { SettingsScreen } from './screens/SettingsScreen'
+import { SettingsScreen } from './screens/settingsScreen/SettingsScreen'
 import { StateContext } from './context/StateContext'
 import { ErrorMessage } from './components/ErrorMessage'
 

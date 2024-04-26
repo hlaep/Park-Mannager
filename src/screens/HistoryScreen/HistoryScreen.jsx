@@ -54,6 +54,7 @@ export const HistoryScreen = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
+    position: 'relative',
     flex: 1,
     backgroundColor: '#B3B7EE'
   }
