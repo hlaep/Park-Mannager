@@ -31,9 +31,7 @@ export const getDateBeforeOrAfterDate = (currentDate, allDates, before) => {
       latestDate = before ? sortedDates[index + 1] : sortedDates[index - 1]
     }
   })
-  if (latestDate === undefined) {
-    return null
-  }
+
   return latestDate
 }
 

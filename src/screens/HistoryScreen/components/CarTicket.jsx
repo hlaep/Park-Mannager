@@ -30,7 +30,7 @@ export const CarTicket = props => {
       <Info name={'Placa:'} value={props.sign} />
       <Info name={'Veículo:'} value={props.type} />
       <Info name={'Tempo estacionado:'} value={props.time} />
-      <Info name={'Preço cobrado:'} value={props.price} />
+      <Info name={'Preço cobrado:'} value={props.formatedPrice} />
       <Info
         name={'Entrada:'}
         value={new Date(props.createdAt).toLocaleString('pt-BR')}

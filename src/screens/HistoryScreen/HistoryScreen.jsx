@@ -6,8 +6,8 @@ import {
   getTicketsOfDate,
   getDateName
 } from './dateLogics'
-import { HistoryScreenContent } from './components/Content'
-import { HistoryScreenHeader } from './components/Header'
+import { HistoryScreenContent } from './components/HistoryScreenContent'
+import { HistoryScreenHeader } from './components/HistoryScreenHeader'
 
 export const HistoryScreen = () => {
   const { cars } = useContext(StateContext)
@@ -29,7 +29,7 @@ export const HistoryScreen = () => {
     const isOlder = direction === 'older' ? true : false
     const olderOrNewerDate = getDateBeforeOrAfterDate(
       currentDate,
-      historyVehicles.map(vehicle => vehicle.exitTime),
+      [new Date(), ...historyVehicles.map(vehicle => vehicle.exitTime)],
       isOlder
     )
     if (olderOrNewerDate) setCurrentDate(olderOrNewerDate)

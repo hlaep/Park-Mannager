@@ -12,7 +12,12 @@ export const ParkingCarActions = props => {
 
   const finishParking = async () => {
     try {
-      await updateParking(props.id, formatPrice(price), formatTime(currentTime))
+      await updateParking(
+        props.id,
+        formatPrice(price),
+        formatTime(currentTime),
+        price
+      )
       await updateCars()
     } catch (e) {
       console.error(e.message, e.e)

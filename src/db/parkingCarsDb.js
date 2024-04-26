@@ -94,7 +94,7 @@ const getYesterdayOfDate = (date, times) => {
   return dayBeforeTimestamp
 }
 
-export const updateParking = async (id, price, time) => {
+export const updateParking = async (id, formatedPrice, time, priceNum) => {
   try {
     const response = await getCars()
     const filteredList = response.cars.filter(car => car.id !== id)
@@ -105,9 +105,10 @@ export const updateParking = async (id, price, time) => {
         {
           ...car,
           parking: false,
-          price,
+          formatedPrice,
           time,
-          exitTime: Date.now()
+          exitTime: Date.now(),
+          priceNum: parseFloat(priceNum)
         }
       ]
     }
