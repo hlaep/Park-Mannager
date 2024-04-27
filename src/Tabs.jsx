@@ -5,7 +5,7 @@ import { HomeScreen } from './screens/homeScreen/HomeScreen'
 import { AddNewCarScreen } from './screens/addNewCarScreen/AddNewCarScreen'
 import { ChargeScreenNav } from './screens/chargeScreen/ChargeScreenNav'
 import { HistoryScreen } from './screens/historyScreen/HistoryScreen'
-import { SettingsScreen } from './screens/settingsScreen/SettingsScreen'
+import { SettingsNavigationScreen } from './screens/settingsScreen/SettingsNavigationScreen'
 import { StateContext } from './context/StateContext'
 import { ErrorMessage } from './components/ErrorMessage'
 
@@ -112,7 +112,7 @@ export const Tabs = () => {
         />
         <Tab.Screen
           name="Settings screen"
-          component={SettingsScreen}
+          component={SettingsNavigationScreen}
           options={{
             tabBarIcon: ({ focused }) => {
               return focused ? (

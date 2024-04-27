@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native'
-import { clearHistory } from '../../db/parkingCarsDb'
-import { StateContext } from '../../context/StateContext'
-import { ButtonOption } from './components/ButtonOption'
-import { ToggleOption } from './components/ToggleOption'
+import { clearHistory } from '../../../db/parkingCarsDb'
+import { StateContext } from '../../../context/StateContext'
+import { ButtonOption } from '../components/ButtonOption'
+import { ToggleOption } from '../components/ToggleOption'
 
 export const SettingsScreen = () => {
   const { displayError, updateCars } = useContext(StateContext)

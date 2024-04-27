@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 export const ToggleOption = () => {
-  const [toggle, setToggle] = useState(false)
-
-  useEffect(() => {}, [toggle])
-
+  const navigation = useNavigation()
+  const showOptions = () => {
+    navigation.navigate('History sort options')
+  }
   return (
     <View style={styles.wrapper}>
       <Text style={styles.text}>Sort history by:</Text>
-      <TouchableOpacity style={styles.toggle} onPress={() => setToggle(true)}>
+      <TouchableOpacity style={styles.toggle} onPress={() => showOptions()}>
         <Text>Day</Text>
         <Image
           style={styles.img}
           source={require('../img/arrow-pointing-down.png')}
         />
       </TouchableOpacity>
-      <View style={styles.options}>
-        <Text style={styles.option}>Day</Text>
-        <Text style={styles.option}>Week</Text>
-        <Text style={styles.option}>Month</Text>
-      </View>
     </View>
   )
 }
@@ -39,8 +35,8 @@ const styles = StyleSheet.create({
   },
   toggle: {
     flexDirection: 'row',
+    borderWidth: 1,
     borderRadius: 8,
-    backgroundColor: '#648DE5',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
@@ -49,13 +45,5 @@ const styles = StyleSheet.create({
   img: {
     width: 30,
     height: 30
-  },
-  options: {
-    backgroundColor: '#648DE5',
-    padding: 8,
-    borderRadius: 8
-  },
-  option: {
-    borderBottomWidth: 1
   }
 })
