@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 export const ToggleOption = () => {
   const navigation = useNavigation()
   const showOptions = () => {
-    navigation.navigate('History sort options')
+    navigation.navigate('Choose an option for soting the history')
   }
   return (
     <View style={styles.wrapper}>

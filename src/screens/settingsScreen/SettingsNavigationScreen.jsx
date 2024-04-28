@@ -14,8 +14,12 @@ export const SettingsNavigationScreen = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="History sort options"
+        name="Choose an option for soting the history"
         component={SortOptionsOfHistory}
+        options={{
+          headerStyle: { backgroundColor: '#000807' },
+          headerTintColor: '#B3B7EE'
+        }}
       />
     </Stack.Navigator>
   )
