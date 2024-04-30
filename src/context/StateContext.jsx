@@ -1,12 +1,14 @@
-import React, {createContext, useState, useEffect} from 'react'
-import {getCars} from '../db/parkingCarsDb'
-import {getTypes} from '../db/vehicleTypesDb'
+import React, { createContext, useState, useEffect } from 'react'
+import { getCars } from '../db/parkingCarsDb'
+import { getTypes } from '../db/vehicleTypesDb'
+import { getHistorySortSettings } from '../db/historySortSettingsDb'
 
 export const StateContext = createContext()
 
-export const StateProvider = ({children}) => {
+export const StateProvider = ({ children }) => {
   const [cars, setCars] = useState([])
   const [vehicleTypes, setVehicleTypes] = useState({})
+  const [historySortSettings, setHistorySortSettings] = useState({})
   const [showError, setShowError] = useState(false)
   const [errorTxt, setErrorTxt] = useState('')
 
@@ -15,7 +17,7 @@ export const StateProvider = ({children}) => {
       const response = await getCars()
       setCars(response.cars)
     } catch (e) {
-      displayError(e.message)
+      console.error('Error getting cars:', e)
     }
   }
 
@@ -23,8 +25,17 @@ export const StateProvider = ({children}) => {
     try {
       const response = await getTypes()
       setVehicleTypes(response)
-    } catch (error) {
-      return {message: 'Error getting vehicleTypes', error}
+    } catch (e) {
+      console.error('Error getting vehicleTypes:', e)
+    }
+  }
+
+  const updateHistorySortSettings = async () => {
+    try {
+      const response = await getHistorySortSettings()
+      setHistorySortSettings(response)
+    } catch (e) {
+      console.error('Error getting history sort settings:', e)
     }
   }
 
@@ -44,7 +55,10 @@ export const StateProvider = ({children}) => {
         errorTxt,
         displayError,
         setShowError,
-      }}>
+        updateHistorySortSettings,
+        historySortSettings
+      }}
+    >
       {children}
     </StateContext.Provider>
   )

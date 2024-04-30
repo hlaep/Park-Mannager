@@ -7,16 +7,16 @@ const setList = async obj => {
   } catch (e) {
     return {
       message: 'Error when trying to set Item at setList at vehicleTypesDb:',
-      e,
+      e
     }
   }
 }
 
 const createList = async () => {
   try {
-    await setList({allTypes: []})
+    await setList({ allTypes: [] })
   } catch (e) {
-    return {message: 'Error at createList at vehicleTypesDb:', e}
+    return { message: 'Error at createList at vehicleTypesDb:', e }
   }
 }
 
@@ -31,7 +31,7 @@ export const getTypes = async () => {
     let list = JSON.parse(response)
     return list
   } catch (e) {
-    return {message: 'Error when trying to fetch list at vehicleTypesDb:', e}
+    return { message: 'Error when trying to fetch list at vehicleTypesDb:', e }
   }
 }
 
@@ -41,11 +41,11 @@ export const getType = async type => {
     const typeMatch = response[type]
     return typeMatch
   } catch (e) {
-    return {message: 'Error when trying to get a type in getType()', e}
+    return { message: 'Error when trying to get a type in getType()', e }
   }
 }
 
-const handleAddNewTypeInAllTypes = (arr, newType) => {
+const handleAddNewTypeInAllTypesArray = (arr, newType) => {
   let alreadyExists = false
   arr.forEach(type => {
     if (type === newType) alreadyExists = true
@@ -63,18 +63,21 @@ export const addNewType = async newType => {
     const list = await getTypes()
     const updatedList = {
       ...list,
-      allTypes: handleAddNewTypeInAllTypes(list['allTypes'], newType),
+      allTypes: handleAddNewTypeInAllTypesArray(list['allTypes'], newType),
       [newType]: {
         name: newType,
         timeCharge: 0,
         minFee: 0,
         firstHourCharge: 0,
-        hourCharge: 0,
-      },
+        hourCharge: 0
+      }
     }
     await setList(updatedList)
   } catch (e) {
-    return {message: 'Error when trying to add new type at vehicleTypesDb:', e}
+    return {
+      message: 'Error when trying to add new type at vehicleTypesDb:',
+      e
+    }
   }
 }
 
@@ -88,11 +91,11 @@ export const deleteType = async name => {
 
     const newList = {
       ...oldList,
-      allTypes: filteredTypes,
+      allTypes: filteredTypes
     }
     await setList(newList)
   } catch (e) {
-    return {message: 'Error when trying to delete type at vehicleTypesDb:', e}
+    return { message: 'Error when trying to delete type at vehicleTypesDb:', e }
   }
 }
 
@@ -104,15 +107,15 @@ export const updateChargesForType = async (typeName, updatedCharges) => {
       ...list,
       [typeName]: {
         ...oldCharges,
-        ...updatedCharges,
-      },
+        ...updatedCharges
+      }
     }
     await setList(updatedList)
   } catch (e) {
     return {
       message:
         'Error when trying to update charges for type at vehicleTypesDb:',
-      e,
+      e
     }
   }
 }
@@ -123,29 +126,32 @@ const detachItem = async name => {
     const item = list[name]
     await deleteType(name)
     const filteredList = await getTypes()
-    return {filteredList, item}
+    return { filteredList, item }
   } catch (e) {
-    return {message: 'Error when trying to detatch item at vehicleTypesDb:', e}
+    return {
+      message: 'Error when trying to detatch item at vehicleTypesDb:',
+      e
+    }
   }
 }
 
 export const updateTypeName = async (oldName, newName) => {
   try {
-    const {filteredList, item} = await detachItem(oldName)
+    const { filteredList, item } = await detachItem(oldName)
     const updatedList = {
       ...filteredList,
       allTypes: [...filteredList['allTypes'], newName],
       [newName]: {
         ...item,
-        name: newName,
-      },
+        name: newName
+      }
     }
     await setList(updatedList)
   } catch (e) {
     return {
       message:
         'Error when trying to update charge type name at vehicleTypesDb:',
-      e,
+      e
     }
   }
 }
@@ -154,6 +160,6 @@ export const clearTypes = async () => {
   try {
     await AsyncStorage.removeItem('vehicleTypes')
   } catch (e) {
-    return {message: 'Error when trying to clear list', e}
+    return { message: 'Error when trying to clear list', e }
   }
 }

@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
   totalCharged: {
     marginTop: 8,
     marginLeft: 16,
-    fontSize: 18,
-    fontWeight: 700
+    fontSize: 18
   }
 })
